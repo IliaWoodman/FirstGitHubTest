@@ -1,3 +1,4 @@
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,12 +21,26 @@ public class FirstPageTest {
     }
 
     @Test
-    public void incorrectRegistration(){
+    public void registrationWithoutName(){
         SignUpPage signUpPage = firstPage.registration("", "qwe@rty.com", "QweRty123");
-        String emptyNameError = signUpPage.getErrorText();
+        String emptyNameError = signUpPage.getErrorText("name");
         Assert.assertEquals("Username can't be blank", emptyNameError);
+    }
+    @Test
+    public void registrationWithoutEmail(){
+        SignUpPage signUpPage = firstPage.registration("QweRty1POI", "", "QwerTqwe87");
+        String emptyEmailError = signUpPage.getErrorText("email");
+        Assert.assertEquals("Email can't be blank", emptyEmailError);
+    }
+    @Test
+    public void registrationWithoutPassword(){
+        SignUpPage signUpPage = firstPage.registration("QweRty1POI", "qwe@rty.com", "");
+        String emptyPasswordError = signUpPage.getErrorText("password");
+        Assert.assertEquals("Password can't be blank", emptyPasswordError);
+    }
 
-
-
+    @After
+    public void TearDown(){
+        driver.quit();
     }
 }
