@@ -20,6 +20,29 @@ public class FirstPageTest {
         firstPage = new FirstPage(driver);
     }
 
+/*    @Test
+    public void transferToSignUpPage(){
+        SignUpPage signUpPage = firstPage.clicksignUpForGitHubButton();
+        String h1Text = signUpPage.getH1Text();
+        Assert.assertEquals("Create your account", h1Text);
+    }*/
+    @Test
+    public void checkInCorrectName(){
+        FirstPage firstPage = new FirstPage(driver);
+        String name = "qqwe";
+        firstPage.typeNameField(name);
+        String res = firstPage.getTextFromTag("name");
+        String expectedRes = String.format("Username %s is not available.", name);
+        Assert.assertEquals(expectedRes, res);
+    }
+    @Test
+    public void checkInCorrectEmail(){
+        FirstPage firstPage = new FirstPage(driver);
+        String email = "qwe@.com";
+        firstPage.typeEmailField(email);
+        Assert.assertEquals("Email is invalid or already taken",firstPage.getTextFromTag("email"));
+
+    }
     @Test
     public void registrationWithoutName(){
         SignUpPage signUpPage = firstPage.registration("", "qwe@rty.com", "QweRty123");
@@ -38,7 +61,6 @@ public class FirstPageTest {
         String emptyPasswordError = signUpPage.getErrorText("password");
         Assert.assertEquals("Password can't be blank", emptyPasswordError);
     }
-
     @After
     public void TearDown(){
         driver.quit();

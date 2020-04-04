@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,6 +14,9 @@ public class FirstPage {
     private By passwordField = By.xpath("(//input[@name='user[password]'])[1]");
     private By signUpForGitHubButton = By.xpath("(//button[text()=\"Sign up for GitHub\"])[1]");
 
+    private By nameError = By.xpath("//div[@class = \"mb-1 \"]");
+    private By emailError = By.xpath("//dd[text() = 'Email is invalid or already taken']");
+
     public FirstPage typeNameField(String username){
         driver.findElement(userNameField).sendKeys(username);
         return this;
@@ -25,9 +29,9 @@ public class FirstPage {
         driver.findElement(passwordField).sendKeys(password);
         return this;
     }
-    public FirstPage clicksignUpForGitHubButton(){
+    public SignUpPage clicksignUpForGitHubButton(){
         driver.findElement(signUpForGitHubButton).click();
-        return this;
+        return new SignUpPage(driver);
     }
     public SignUpPage registration (String username, String email, String password){
         this.typeNameField(username);
@@ -36,6 +40,12 @@ public class FirstPage {
         this.clicksignUpForGitHubButton();
         return new SignUpPage(driver);
     }
-
+    public String  getTextFromTag(String text){
+        if (text.equals("name")){
+            return driver.findElement(nameError).getText();
+        }else if (text.equals("email")){
+            return driver.findElement(emailError).getText();
+        }else return null;
+    }
 
 }

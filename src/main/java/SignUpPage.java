@@ -7,10 +7,17 @@ public class SignUpPage {
     public SignUpPage(WebDriver driver) {
         this.driver = driver;
     }
-
+    private By h1Text = By.xpath("//h1[text()=\"Create your account\"]");
+    private By nameField = By.xpath("//input[@name = \"user[login]\"]");
+    private By emailField = By.xpath("//input[@name = \"user[email]\"]");
+    private By passwordField = By.xpath("//input[@name = \"user[password]\"]");
     private By emptyNameError = By.xpath("//dd[text() = \"Username can't be blank\"]");
     private By emptyEmailError = By.xpath("//dd[text() = \"Email can't be blank\"]");
     private By emptyPasswordError = By.xpath("//dd[text() = \"Password can't be blank\"]");
+
+    public String getH1Text(){
+        return driver.findElement(h1Text).getText();
+    }
 
     public String getErrorText(String errorName){
         if (errorName.equals("name")){
