@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+//страница регистрации
 
 public class SignUpPage {
     WebDriver driver;

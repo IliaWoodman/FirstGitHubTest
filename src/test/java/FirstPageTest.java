@@ -15,17 +15,25 @@ public class FirstPageTest {
     public void setUp(){
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\QS_Specialist\\IdeaProjects\\driver\\chromedriver.exe");
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get("https://github.com/");
         firstPage = new FirstPage(driver);
     }
 
-/*    @Test
+    @Test
     public void transferToSignUpPage(){
         SignUpPage signUpPage = firstPage.clicksignUpForGitHubButton();
         String h1Text = signUpPage.getH1Text();
+        Assert.assertEquals("https://github.com/join",driver.getCurrentUrl());
         Assert.assertEquals("Create your account", h1Text);
-    }*/
+    }
+    @Test
+    public void transferToSignInPage(){
+        SignInPage signInPage = firstPage.clickSignInButton();
+        String h1Text = signInPage.getH1Text();
+        Assert.assertEquals("https://github.com/login", driver.getCurrentUrl());
+        Assert.assertEquals("Sign in to GitHub", h1Text);
+    }
     @Test
     public void checkInCorrectName(){
         FirstPage firstPage = new FirstPage(driver);
@@ -38,7 +46,7 @@ public class FirstPageTest {
     @Test
     public void checkInCorrectEmail(){
         FirstPage firstPage = new FirstPage(driver);
-        String email = "qwe@.com";
+        String email = "qwe rty.com";
         firstPage.typeEmailField(email);
         Assert.assertEquals("Email is invalid or already taken",firstPage.getTextFromTag("email"));
 

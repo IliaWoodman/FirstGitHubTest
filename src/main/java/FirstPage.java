@@ -2,6 +2,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+//первая страница
 
 public class FirstPage {
     private WebDriver driver;
@@ -13,6 +14,7 @@ public class FirstPage {
     private By emailField = By.xpath("(//input[@name='user[email]'])[1]");
     private By passwordField = By.xpath("(//input[@name='user[password]'])[1]");
     private By signUpForGitHubButton = By.xpath("(//button[text()=\"Sign up for GitHub\"])[1]");
+    private By signInButton = By.xpath("//a[@href = '/login']");
 
     private By nameError = By.xpath("//div[@class = \"mb-1 \"]");
     private By emailError = By.xpath("//dd[text() = 'Email is invalid or already taken']");
@@ -32,6 +34,10 @@ public class FirstPage {
     public SignUpPage clicksignUpForGitHubButton(){
         driver.findElement(signUpForGitHubButton).click();
         return new SignUpPage(driver);
+    }
+    public SignInPage clickSignInButton(){
+        driver.findElement(signInButton).click();
+        return new SignInPage(driver);
     }
     public SignUpPage registration (String username, String email, String password){
         this.typeNameField(username);
