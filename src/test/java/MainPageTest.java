@@ -44,6 +44,15 @@ public class MainPageTest {
         Assert.assertEquals(String.format("https://github.com/%s/%s", yourGitHubName, repoName), driver.getCurrentUrl());
     }
 
+    @Test
+    public void getRepoNameLickAndRandomClick(){
+        mainPage.getRepoListAndRandomClick();
+        System.out.println(driver.getCurrentUrl());
+        driver.navigate().back();
+        System.out.println(driver.getCurrentUrl());
+
+    }
+
     @After
     public void tearDown() {
         driver.quit();
